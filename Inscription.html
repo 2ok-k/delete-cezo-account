@@ -4,55 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="inscription.css" />
-    <title>Inscription</title>
+    <title>Supprimer</title>
   </head>
   <body>
     <div class="container" id="container">
       <div class="form-container sign-in-container">
         <form action="#">
-          <h1>Inscription</h1>
+          <h1>Suppression</h1>
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
             <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
           </div>
-          <span>utiliser numéros de téléphone</span>
+          <span>Veuillez entrer vos informations qui serons supprimer</span>
           <input type="utilisateur" placeholder="utilisateur" />
           <input type="text" placeholder="téléphone" inputmode="tel" />
-          <a href="#">dejà inscrit ?</a>
 
-          <button onclick="window.location.href='confirmation.html'">
+          <button
+            class="btn"
+            onclick="window.location.href='confirmation.html'">
             Envoyer
           </button>
         </form>
       </div>
-      <div class="overlay-container">
-        <div class="overlay">
-          <div class="overlay-panel overlay-right">
-            <h1 id="greeting"></h1>
-            <p>
-              Veuillez s'ils vous plait suivre les instructions pour une
-              meilleur expériences utilisateur
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
-    <script>
-      function getGreeting() {
-        const now = new Date();
-        const hour = now.getHours();
 
-        if (hour >= 7 && hour < 18) {
-          return "Bonjour";
-        } else {
-          return "Bonsoir";
-        }
-      }
-
-      // Mettre à jour le contenu de la balise <h1> avec l'id "greeting"
-      document.getElementById("greeting").textContent = getGreeting();
-    </script>
     <script src="inscript.js"></script>
   </body>
 </html>
