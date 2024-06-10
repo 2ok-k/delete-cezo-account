@@ -1,25 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="conf.css" />
-    <title>Verification</title>
-  </head>
-  <body>
-    <div class="otp-container">
-      <div class="otp-wrapper">
-        <input type="text" maxlength="1" data-index="1" />
-        <input type="text" maxlength="1" data-index="2" />
-        <input type="text" maxlength="1" data-index="3" />
-        <div class="hyphen">-</div>
-        <input type="text" maxlength="1" data-index="4" />
-        <input type="text" maxlength="1" data-index="5" />
-        <input type="text" maxlength="1" data-index="6" />
-        <p>Entrer le code de confirmation</p>
-        <button class="btn">Valider</button>
-      </div>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="suppression.css" />
+  <title>Verification</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+    <div class="form-container sign-in-container">
+      <form id="verify-form">
+        <h1>Confirmation</h1><br>
+        <span>Veuillez entrer vos informations qui seront supprimées</span>
+        <input type="text" placeholder="téléphone" inputmode="tel" id="phone" readonly />
+        <input type="number" placeholder="OTP" inputmode="otp" id="otp" />
+
+        <button type="submit" class="btn">Confirmer</button>
+      </form>
     </div>
-    <script src="conf.js"></script>
-  </body>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const phone = sessionStorage.getItem('phone');
+      if (phone) {
+        document.getElementById('phone').value = phone;
+      }
+
+      document.getElementById('verify-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const phone = document.getElementById('phone').value;
+        const otp = document.getElementById('otp').value;
+        const data = {
+          phone: phone,
+          code: otp
+        };
+
+        fetch('http://cezomobile.softartisanapps.com/auth/remove_account', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            window.location.href = 'succes.html';
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      });
+    });
+  </script>
+</body>
+
 </html>

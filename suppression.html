@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="suppression.css" />
+  <title>Supprimer</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+    <div class="form-container sign-in-container">
+      <form id="delete-form">
+        <h1>Suppression</h1><br>
+        <span>Veuillez entrer vos informations qui seront supprimées</span>
+        <input type="text" placeholder="téléphone" inputmode="tel" id="phone" />
+
+        <button type="submit" class="btn">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('delete-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const phone = document.getElementById('phone').value;
+      const data = {
+        phone: phone
+      };
+
+      fetch('http://cezomobile.softartisanapps.com/auth/otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+
+          sessionStorage.setItem('phone', phone);
+          window.location.href = 'confirmation.html';
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
+  </script>
+</body>
+
+</html>
